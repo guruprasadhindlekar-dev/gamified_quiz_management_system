@@ -78,7 +78,7 @@ export default function UserDashboard() {
       return;
     }
 
-    navigate("/quiz");
+    navigate("/Questions");
   };
 
   return (

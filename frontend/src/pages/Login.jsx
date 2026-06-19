@@ -27,7 +27,7 @@ export default function Login() {
       return;
     }
 
-    // Super Admin
+    // Super Admin (hardcoded)
     if (email === "admin@quiz.com" && password === "admin123") {
       localStorage.setItem("currentUser", JSON.stringify({ email, username: "Super Admin", role: "superadmin" }));
       localStorage.setItem("role", "superadmin");
@@ -35,7 +35,7 @@ export default function Login() {
       return;
     }
 
-    // Quiz Admin (AdminDashboard)
+    // Quiz Admin (hardcoded)
     if (email === "quizadmin@quiz.com" && password === "quiz123") {
       localStorage.setItem("currentUser", JSON.stringify({ email, username: "Quiz Admin", role: "admin" }));
       localStorage.setItem("role", "admin");
@@ -43,10 +43,30 @@ export default function Login() {
       return;
     }
 
-    // Regular User
-    localStorage.setItem("currentUser", JSON.stringify({ email, username: "Player", role: "user" }));
-    localStorage.setItem("role", "user");
-    navigate("/user-dashboard");
+    // Check users registered via Signup
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const matchedUser = users.find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (!matchedUser) {
+      setError("Invalid email or password");
+      return;
+    }
+
+    // Save as currentUser and redirect based on role
+    localStorage.setItem("currentUser", JSON.stringify({
+      email: matchedUser.email,
+      username: matchedUser.username,
+      role: matchedUser.role,
+    }));
+    localStorage.setItem("role", matchedUser.role);
+
+    if (matchedUser.role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/user-dashboard");
+    }
   };
 
   return (
@@ -193,7 +213,6 @@ export default function Login() {
                 Join as Guest
               </button>
             </div>
-
           </div>
         </div>
       </motion.div>

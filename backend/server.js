@@ -10,13 +10,13 @@ const app = express();
 connectDB();
 
 // ✅ Middleware
-//app.use(cors());
-//app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
 // ✅ Routes
-//app.use('/api/auth', require('./src/routes/authRoutes'));
-//app.use('/api/quiz', require('./src/routes/quizRoutes'));
-//app.use('/api/user', require('./src/routes/userRoutes'));
+app.use('/api/auth', require('./src/routes/authRoutes'));
+app.use('/api/quiz', require('./src/routes/quizRoutes'));
+app.use('/api/user', require('./src/routes/userRoutes'));
 
 // ✅ Health check
 app.get('/', (req, res) => {
