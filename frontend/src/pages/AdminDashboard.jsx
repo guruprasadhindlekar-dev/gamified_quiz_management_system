@@ -142,12 +142,12 @@ export default function AdminDashboard() {
 
           <nav className="space-y-2">
             {[
-              { icon: <LayoutDashboard className="w-5 h-5" />, label: "Dashboard", id: "dashboard", action: () =>    navigate("/admin") },
-{ icon: <Plus className="w-5 h-5" />, label: "Create Quiz", id: "create", action: () => navigate("/quiz") },
-{ icon: <FileQuestion className="w-5 h-5" />, label: "Questions", id: "questions", action: () => navigate("/questions") },
-{ icon: <BarChart3 className="w-5 h-5" />, label: "Analytics", id: "analytics", action: () => navigate("/analytics") },
-{ icon: <Trophy className="w-5 h-5" />, label: "Leaderboard", id: "leaderboard", action: () => navigate("/leaderboard") },
-{ icon: <Settings className="w-5 h-5" />, label: "Settings", id: "settings", action: () => navigate("/settings") },
+              { icon: <LayoutDashboard className="w-5 h-5" />, label: "Dashboard", id: "dashboard", action: () => navigate("/admin") },
+              { icon: <Plus className="w-5 h-5" />, label: "Create Quiz", id: "create", action: () => navigate("/quiz") },
+              { icon: <FileQuestion className="w-5 h-5" />, label: "Questions", id: "questions", action: () => navigate("/questions") },
+              { icon: <BarChart3 className="w-5 h-5" />, label: "Analytics", id: "analytics", action: () => navigate("/analytics") },
+              { icon: <Trophy className="w-5 h-5" />, label: "Leaderboard", id: "leaderboard", action: () => navigate("/leaderboard") },
+              { icon: <Settings className="w-5 h-5" />, label: "Settings", id: "settings", action: () => navigate("/settings") },
             ].map((item) => (
               <motion.button
                 key={item.id}
@@ -292,56 +292,57 @@ export default function AdminDashboard() {
                 </BarChart>
               </ResponsiveContainer>
             </Card>
-          {/* ✅ Recent Quizzes Panel */}
-          <div className="mt-8 bg-[#0b1220] rounded-2xl p-6 border border-[#1f2a44]">
-            <div className="flex justify-between items-center mb-6">
-              <div className="flex items-center gap-2 text-white">
-                <FileQuestion className="w-5 h-5 text-[#00F5D4]" />
-                <h2 className="text-lg font-semibold">Recent Quizzes</h2>
+
+            {/* ✅ Recent Quizzes Panel */}
+            <div className="mt-8 bg-[#0b1220] rounded-2xl p-6 border border-[#1f2a44]">
+              <div className="flex justify-between items-center mb-6">
+                <div className="flex items-center gap-2 text-white">
+                  <FileQuestion className="w-5 h-5 text-[#00F5D4]" />
+                  <h2 className="text-lg font-semibold">Recent Quizzes</h2>
+                </div>
+
+                <Button
+                  className="bg-gradient-to-r from-[#6C5CE7] to-[#FF2E63] px-4 py-2 rounded-lg text-white"
+                  onClick={() => navigate("/admin/create-quiz")}
+                >
+                  + New Quiz
+                </Button>
               </div>
 
-              <Button
-                className="bg-gradient-to-r from-[#6C5CE7] to-[#FF2E63] px-4 py-2 rounded-lg text-white"
-                onClick={() => navigate("/admin/create-quiz")}
-              >
-                + New Quiz
-              </Button>
-            </div>
+              <div className="space-y-4">
+                {[
+                  { title: "General Knowledge", q: 10, plays: 234, score: 78 },
+                  { title: "Science Trivia", q: 15, plays: 189, score: 82 },
+                  { title: "History Challenge", q: 20, plays: 156, score: 71 },
+                  { title: "Math Quiz", q: 12, plays: 203, score: 85 },
+                ].map((quiz, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between bg-[#111827] p-4 rounded-xl hover:bg-[#1E293B] transition"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#6C5CE7] to-[#FF2E63]">
+                        <FileQuestion className="text-white w-5 h-5" />
+                      </div>
 
-            <div className="space-y-4">
-              {[
-                { title: "General Knowledge", q: 10, plays: 234, score: 78 },
-                { title: "Science Trivia", q: 15, plays: 189, score: 82 },
-                { title: "History Challenge", q: 20, plays: 156, score: 71 },
-                { title: "Math Quiz", q: 12, plays: 203, score: 85 },
-              ].map((quiz, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between bg-[#111827] p-4 rounded-xl hover:bg-[#1E293B] transition"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#6C5CE7] to-[#FF2E63]">
-                      <FileQuestion className="text-white w-5 h-5" />
+                      <div>
+                        <h3 className="text-white font-semibold">{quiz.title}</h3>
+                        <p className="text-gray-400 text-sm">
+                          {quiz.q} questions • {quiz.plays} plays
+                        </p>
+                      </div>
                     </div>
 
-                    <div>
-                      <h3 className="text-white font-semibold">{quiz.title}</h3>
-                      <p className="text-gray-400 text-sm">
-                        {quiz.q} questions • {quiz.plays} plays
+                    <div className="text-right">
+                      <p className="text-[#00F5D4] text-xl font-bold">
+                        {quiz.score}%
                       </p>
+                      <p className="text-gray-400 text-xs">Avg Score</p>
                     </div>
                   </div>
-
-                  <div className="text-right">
-                    <p className="text-[#00F5D4] text-xl font-bold">
-                      {quiz.score}%
-                    </p>
-                    <p className="text-gray-400 text-xs">Avg Score</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
 
           </div>
         </div>

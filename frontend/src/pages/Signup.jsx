@@ -32,7 +32,6 @@ export default function Signup() {
     setError("");
     setSuccess("");
 
-    // Validation
     if (password.length < 6) {
       setError("Password must be at least 6 characters");
       return;
@@ -48,7 +47,21 @@ export default function Signup() {
       return;
     }
 
-    // Temporary success
+    // Get existing users array or start fresh
+    const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+
+    // Check if email already registered
+    const alreadyExists = existingUsers.find((u) => u.email === email);
+    if (alreadyExists) {
+      setError("An account with this email already exists");
+      return;
+    }
+
+    // Save new user
+    const newUser = { email, username, password, role };
+    existingUsers.push(newUser);
+    localStorage.setItem("users", JSON.stringify(existingUsers));
+
     setSuccess("Account created successfully! Redirecting to login...");
 
     setTimeout(() => {
@@ -58,10 +71,9 @@ export default function Signup() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A] relative overflow-hidden flex items-center justify-center p-4">
-      
+
       {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        
         <motion.div
           className="absolute top-20 left-20 opacity-20"
           animate={{ y: [0, -40, 0] }}
@@ -98,7 +110,7 @@ export default function Signup() {
       {/* Card */}
       <motion.div className="relative z-10 w-full max-w-md">
         <div className="bg-[#111827] rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-          
+
           {/* Header */}
           <div className="bg-gradient-to-r from-[#6C5CE7] to-[#FF2E63] p-6 text-center">
             <div className="flex justify-center mb-3">
@@ -190,9 +202,7 @@ export default function Signup() {
                   type="button"
                   onClick={() => setRole("user")}
                   className={`flex-1 p-3 rounded-xl ${
-                    role === "user"
-                      ? "bg-[#00F5D4]/20"
-                      : "bg-white/5"
+                    role === "user" ? "bg-[#00F5D4]/20" : "bg-white/5"
                   }`}
                 >
                   <UserCircle className="inline mr-2" />
@@ -203,12 +213,9 @@ export default function Signup() {
                   type="button"
                   onClick={() => setRole("admin")}
                   className={`flex-1 p-3 rounded-xl ${
-                    role === "admin"
-                      ? "bg-[#FF2E63]/20"
-                      : "bg-white/5"
+                    role === "admin" ? "bg-[#FF2E63]/20" : "bg-white/5"
                   }`}
                 >
-                  
                   <Shield className="inline mr-2" />
                   ADMIN
                 </button>
@@ -243,14 +250,12 @@ export default function Signup() {
             {/* Login */}
             <div className="mt-6 text-center">
               <p className="text-white/60">
-              Already have an account?{""} 
-              <button onClick={() => navigate("/")}
-                className=" ml-2 text-[#00F5D4]">
-                Login here
-              </button>
+                Already have an account?{" "}
+                <button onClick={() => navigate("/")} className="ml-2 text-[#00F5D4]">
+                  Login here
+                </button>
               </p>
             </div>
-
           </div>
         </div>
       </motion.div>

@@ -12,7 +12,7 @@ import Questions from "./pages/Questions";
 import JoinQuiz from "./pages/JoinQuiz";
 import Certificate from "./components/Certificate";
 import SuperAdmin from "./pages/SuperAdmin.jsx";
-import CreateQuiz from "./pages/QuizPage";
+import QuizPage from "./pages/QuizPage";
 import Results from "./pages/Results";
 import UserDashboard from "./pages/UserDashboard";
 import Landing from "./pages/Landing";
@@ -40,9 +40,9 @@ function App() {
       <Route path="/questions" element={<Layout><Questions /></Layout>} />
       <Route path="/settings" element={<Layout><Setting /></Layout>} />
       <Route path="/superadmin" element={<Layout><SuperAdmin /></Layout>} />
-      <Route path="/join" element={<Layout><JoinQuiz /></Layout>} />
+      <Route path="/QuizPage" element={<Layout><QuizPage /></Layout>} />
       <Route path="/JoinQuiz" element={<Layout><JoinQuiz /></Layout>} />
-      <Route path="/quiz" element={<Layout><CreateQuiz /></Layout>} />
+      <Route path="/quiz" element={<Layout><QuizPage /></Layout>} />
       <Route path="/results" element={<Layout><Results /></Layout>} />
       <Route path="/certificate" element={<Layout><Certificate /></Layout>} />
       <Route path="/profile" element={<Layout><UserProfile /></Layout>} />

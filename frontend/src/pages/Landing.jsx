@@ -1,157 +1,229 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
-import { Trophy, Zap, Star, Users } from "lucide-react";
+import { Trophy, Zap, Star, Users, Target, Sparkles, Play, Code } from "lucide-react";
+import { Button } from "../components/Button";
 import { Card } from "../components/Card";
-
+ 
 export default function Landing() {
   const navigate = useNavigate();
-
+ 
   const features = [
-    { icon: <Zap className="w-6 h-6" />, title: "Real-time Quiz", desc: "Live gameplay" },
-    { icon: <Trophy className="w-6 h-6" />, title: "Leaderboards", desc: "Track ranks" },
-    { icon: <Star className="w-6 h-6" />, title: "XP System", desc: "Earn rewards" },
-    { icon: <Users className="w-6 h-6" />, title: "Multiplayer", desc: "Play with friends" },
+    { icon: <Zap className="w-6 h-6" />, title: "Real-time Quiz", desc: "Live competitive gameplay" },
+    { icon: <Trophy className="w-6 h-6" />, title: "Leaderboards", desc: "Track your rankings" },
+    { icon: <Star className="w-6 h-6" />, title: "XP System", desc: "Earn rewards & badges" },
+    { icon: <Users className="w-6 h-6" />, title: "Multiplayer", desc: "Challenge friends" },
   ];
-
-  const stats = [
-    { value: "10K+", label: "Players 👥" },
-    { value: "500+", label: "Quizzes 🧠" },
-    { value: "1M+", label: "XP ⚡" },
-    { value: "50+", label: "Countries 🌍" },
-  ];
-
+ 
   const topPlayers = [
-    { rank: 1, name: "Alex_Pro", score: 9850, flag: "🇺🇸" },
-    { rank: 2, name: "QuizMaster", score: 9420, flag: "🇮🇳" },
-    { rank: 3, name: "BrainStorm", score: 9100, flag: "🇬🇧" },
-    { rank: 4, name: "FastThinker", score: 8900, flag: "🇨🇦" },
-    { rank: 5, name: "WiseOwl", score: 8700, flag: "🇦🇺" },
+    { rank: 1, name: "Alex_Pro", score: 9850, xp: 2500, avatar: "🥇" },
+    { rank: 2, name: "QuizMaster", score: 9420, xp: 2300, avatar: "🥈" },
+    { rank: 3, name: "BrainStorm", score: 9100, xp: 2100, avatar: "🥉" },
+    { rank: 4, name: "FastThinker", score: 8900, xp: 2000, avatar: "⚡" },
+    { rank: 5, name: "WiseOwl", score: 8700, xp: 1900, avatar: "🦉" },
   ];
-
-  const handleStartQuiz = () => {
-    const role = localStorage.getItem("role");
-    if (role) navigate("/quiz");
-    else navigate("/login");
-  };
-
+ 
   return (
-   <div className="relative min-h-screen bg-[#0F172A] text-white overflow-hidden">
-
-      {/* 🔥 BACKGROUND */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-
-        {/* Animated Gradient */}
-        <div className="absolute inset-0 animated-bg"></div>
-
-        {/* Glow Blobs */}
-        <div className="blob b1"></div>
-        <div className="blob b2"></div>
-        <div className="blob b3"></div>
-
-        {/* Floating Icons */}
-        <div className="absolute inset-0">
-
-          <motion.div
-            className="absolute top-20 left-20 opacity-60"
-            animate={{ y: [0, -40, 0], rotate: [0, 15, 0] }}
-            transition={{ duration: 6, repeat: Infinity }}
-          >
-            <Trophy className="w-32 h-32 text-yellow-400 drop-shadow-[0_0_40px_#F59E0B]" />
-          </motion.div>
-
-          <motion.div
-            className="absolute bottom-20 right-20 opacity-60"
-            animate={{ rotate: [0, 360] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          >
-            <Star className="w-28 h-28 text-purple-400 drop-shadow-[0_0_40px_#6C5CE7]" />
-          </motion.div>
-
-          <motion.div
-            className="absolute top-1/2 left-1/4 opacity-40"
-            animate={{ y: [0, 30, 0] }}
-            transition={{ duration: 8, repeat: Infinity }}
-          >
-            <Zap className="w-20 h-20 text-cyan-400 drop-shadow-[0_0_30px_#00F5D4]" />
-          </motion.div>
-
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A] relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-20 left-10 text-6xl opacity-20"
+          animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        >
+          <Trophy className="w-16 h-16 text-[#F59E0B]" />
+        </motion.div>
+        <motion.div
+          className="absolute top-40 right-20 text-6xl opacity-20"
+          animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        >
+          <Star className="w-16 h-16 text-[#00F5D4]" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-32 left-32 text-6xl opacity-20"
+          animate={{ y: [0, -15, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 3.5, repeat: Infinity }}
+        >
+          <Zap className="w-16 h-16 text-[#FF2E63]" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-20 right-40 text-6xl opacity-20"
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+          <Sparkles className="w-16 h-16 text-[#6C5CE7]" />
+        </motion.div>
       </div>
-
-      {/* ✅ MAIN CONTENT */}
-      <div className="relative z-10">
-
-        {/* HERO */}
-        <div className="text-center pt-20 px-4">
-          <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(255,0,150,0.5)]">
+ 
+ 
+ 
+      {/* Hero Section */}
+      <div className="relative z-10 container mx-auto px-6 lg:px-12 py-12 lg:py-20">
+        <motion.div
+          className="text-center max-w-4xl mx-auto"
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <motion.div
+            className="inline-block mb-6"
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <span className="px-4 py-2 bg-gradient-to-r from-[#6C5CE7]/20 to-[#FF2E63]/20 border border-[#6C5CE7]/30 rounded-full text-sm font-game">
+              🎮 THE ULTIMATE QUIZ EXPERIENCE
+            </span>
+          </motion.div>
+ 
+          <h1 className="text-5xl lg:text-7xl font-game font-bold mb-6 bg-gradient-to-r from-[#6C5CE7] via-[#00F5D4] to-[#FF2E63] bg-clip-text text-transparent leading-tight">
             PLAY. COMPETE. WIN.
           </h1>
-
-          <p className="text-gray-400 mt-3">
-            Challenge players worldwide in a fun quiz game
+ 
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Challenge yourself and compete with players worldwide in the most exciting quiz game platform
           </p>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-3 mt-6">
-            <button
-              onClick={handleStartQuiz}
-              className="px-5 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
-            >
-              Start Game
-            </button>
-
-            <button
-              onClick={() => navigate("/join")}
-              className="px-5 py-3 rounded-full border border-cyan-400 text-cyan-400"
-            >
-              Join Code
-            </button>
-          </div>
-        </div>
-
-        {/* STATS */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 md:px-6 mt-10">
-          {stats.map((s, i) => (
-            <div key={i} className="bg-white/10 p-4 rounded-lg text-center backdrop-blur">
-              <h3 className="text-lg font-bold text-cyan-400">{s.value}</h3>
-              <p className="text-gray-300 text-xs">{s.label}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* FEATURES */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-4 md:px-6 mt-12">
-          {features.map((f, i) => (
-            <Card key={i} className="bg-white/10 p-4 rounded-lg backdrop-blur">
-              <div className="text-cyan-400">{f.icon}</div>
-              <h3 className="font-bold mt-2">{f.title}</h3>
-              <p className="text-gray-300 text-sm">{f.desc}</p>
-            </Card>
-          ))}
-        </div>
-
-        {/* LEADERBOARD */}
-        <div className="px-4 md:px-8 mt-12 pb-12">
-          <h2 className="text-xl font-bold mb-4 text-center">Top Players</h2>
-
-          <div className="space-y-2">
-            {topPlayers.map((p, i) => (
-              <div
-                key={i}
-                className="flex justify-between bg-white/10 p-3 rounded-lg backdrop-blur"
+ 
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-[#6C5CE7] to-[#FF2E63] hover:shadow-[0_0_30px_rgba(108,92,231,0.5)] transition-all text-lg px-8 py-6 font-game"
+                onClick={() => navigate("/Questions")}
               >
-                <div className="flex gap-3">
-                  <span>#{p.rank}</span>
-                  <span>{p.flag}</span>
-                  <span>{p.name}</span>
+                <Play className="w-5 h-5 mr-2" />
+                START GAME
+              </Button>
+            </motion.div>
+ 
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-[#00F5D4] text-[#00F5D4] hover:bg-[#00F5D4]/10 hover:shadow-[0_0_30px_rgba(0,245,212,0.3)] transition-all text-lg px-8 py-6 font-game"
+                onClick={() => navigate("/JoinQuiz")}
+              >
+                <Code className="w-5 h-5 mr-2" />
+                JOIN WITH CODE
+              </Button>
+            </motion.div>
+          </div>
+ 
+          {/* Stats Bar */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+            {[
+              { label: "Active Players", value: "10K+", color: "#6C5CE7" },
+              { label: "Total Quizzes", value: "500+", color: "#00F5D4" },
+              { label: "XP Earned", value: "1M+", color: "#FF2E63" },
+              { label: "Countries", value: "50+", color: "#22C55E" },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                className="bg-[#111827] border border-white/10 rounded-xl p-4"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4 + i * 0.1 }}
+              >
+                <div className="text-2xl font-bold font-game" style={{ color: stat.color }}>
+                  {stat.value}
                 </div>
-
-                <div className="text-cyan-400">{p.score}</div>
-              </div>
+                <div className="text-sm text-gray-400">{stat.label}</div>
+              </motion.div>
             ))}
           </div>
-        </div>
-
+        </motion.div>
+ 
+        {/* Features Section */}
+        <motion.div
+          className="mt-20 max-w-6xl mx-auto"
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
+          <h2 className="text-3xl lg:text-4xl font-game font-bold text-center mb-12">
+            <span className="bg-gradient-to-r from-[#6C5CE7] to-[#00F5D4] bg-clip-text text-transparent">
+              GAME FEATURES
+            </span>
+          </h2>
+ 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -5, scale: 1.02 }}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.7 + i * 0.1 }}
+              >
+                <Card className="bg-[#111827] border-[#6C5CE7]/20 hover:border-[#6C5CE7] transition-all p-6 hover:shadow-[0_0_30px_rgba(108,92,231,0.2)]">
+                  <div className="w-14 h-14 bg-gradient-to-br from-[#6C5CE7] to-[#FF2E63] rounded-xl flex items-center justify-center mb-4">
+                    {feature.icon}
+                  </div>
+                  <h3 className="font-game text-lg mb-2">{feature.title}</h3>
+                  <p className="text-sm text-gray-400">{feature.desc}</p>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+ 
+        {/* Leaderboard Preview */}
+        <motion.div
+          className="mt-20 max-w-4xl mx-auto"
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl lg:text-4xl font-game font-bold">
+              <span className="bg-gradient-to-r from-[#F59E0B] to-[#FF2E63] bg-clip-text text-transparent">
+                TOP PLAYERS
+              </span>
+            </h2>
+            <Button
+              variant="ghost"
+              className="text-[#00F5D4] hover:text-[#00F5D4] hover:bg-[#00F5D4]/10"
+              onClick={() => navigate("/LeaderBoard")}
+            >
+              View All
+            </Button>
+          </div>
+ 
+          <Card className="bg-[#111827] border-[#6C5CE7]/20 p-6">
+            <div className="space-y-3">
+              {topPlayers.map((player, i) => (
+                <motion.div
+                  key={i}
+                  className={`flex items-center gap-4 p-4 rounded-xl ${
+                    i < 3
+                      ? "bg-gradient-to-r from-[#6C5CE7]/10 to-[#FF2E63]/10 border border-[#6C5CE7]/30"
+                      : "bg-[#1E293B]/50"
+                  }`}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 1.1 + i * 0.1 }}
+                >
+                  <div className="text-2xl font-game font-bold text-[#6C5CE7] w-8">
+                    #{player.rank}
+                  </div>
+                  <div className="text-3xl">{player.avatar}</div>
+                  <div className="flex-1">
+                    <div className="font-semibold">{player.name}</div>
+                    <div className="text-sm text-gray-400">{player.xp} XP</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-game font-bold text-[#00F5D4]">
+                      {player.score.toLocaleString()}
+                    </div>
+                    <div className="text-xs text-gray-400">points</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </Card>
+        </motion.div>
       </div>
     </div>
   );
 }
+ 

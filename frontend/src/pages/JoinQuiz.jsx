@@ -159,7 +159,7 @@ export default function JoinQuiz() {
 
             {/* Back Button */}
             <Button
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/landing")}
               className="w-full h-12 rounded-xl text-white font-medium
               bg-white/5 backdrop-blur-md border border-white/10
               hover:bg-white/10 transition-all duration-300"
